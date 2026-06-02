@@ -380,8 +380,14 @@ watch(()=>props.conversationId, (newId, oldId) => {
         console.log('cleared !')
         const messages= store.getters["messagesList/getItems"]
         
-        if(messages.length>0)
+        if (messages.length > 0) {
+        // console.log('orig',messages.length)
+            if (messages.length > 6) {
+            messages.splice(0, messages.length - 5);
+            // console.log('orig2',messages.length)
+            }
             getConversationSummary(messages);
+        }
         clearChatHistory();
         deepChatRef.value?.clearMessages();
         loadChatHistory();
